@@ -43,15 +43,11 @@ export const setBackendCrew = (newCrew) => {
 };
 
 export const frontendCrewCount = () => {
-  const crews = getLocalStorageData();
-
-  return crews.frontend.length;
+  return getFrontendCrews().length;
 };
 
 export const backendCrewCount = () => {
-  const crews = getLocalStorageData();
-
-  return crews.frontend.length;
+  return getBackendCrews().length;
 };
 
 export const renderCourses = `<section>
@@ -83,13 +79,11 @@ export const addCrew = (course, crewName) => {
         id,
         name: crewName,
       });
-      break;
     case 'backend':
       setBackendCrew({
         id,
         name: crewName,
       });
-      break;
   }
 
   return `
@@ -103,8 +97,19 @@ export const addCrew = (course, crewName) => {
 };
 
 export const renderCrews = (crews) => {
+  crews.forEach(({ name }, index) => {
+    const crew = `
+  <tr>
+    <td>${index + 1}</td>
+    <td>${name}</td>
+    <td>
+      <button class="delete-crew-button">삭제</button>
+    </td>
+  </tr>`;
 
-  return crews.map(({ name }) => addCrew(course = 'frontend', name));
+    const tbody = document.querySelector('#tbody');
+    tbody.insertAdjacentHTML('beforeend', crew);
+  });
 };
 
 export const resetCrewNameInput = () => {

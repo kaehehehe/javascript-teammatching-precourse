@@ -6,8 +6,8 @@ const teamTab = document.querySelector('#team-tab');
 const crewNameInput = document.querySelector('#crew-name-input');
 const addCrewButton = document.querySelector('#add-crew-button');
 
-//TODO: null로 변경해야 함
-let currentTab = 'frontend';
+let currentTab = null;
+let currentCourse = 'frontend';
 let crewName = '';
 
 crewTab.addEventListener('click', () => {
@@ -20,6 +20,9 @@ crewTab.addEventListener('click', () => {
   const mainTag = document.querySelector('#main');
 
   mainTag.insertAdjacentHTML('afterbegin', crew.renderCourses);
+
+  //TODO: radio 버튼을 눌렀을 시 보이도록 수정해야 함
+  crew.renderCrews(crew.getFrontendCrews());
 });
 
 crewNameInput.addEventListener('change', (e) => {
@@ -32,7 +35,7 @@ addCrewButton.addEventListener('click', () => {
   }
 
   const tbody = document.querySelector('#tbody');
-  tbody.insertAdjacentHTML('beforeend', crew.addCrew(currentTab, crewName));
+  tbody.insertAdjacentHTML('beforeend', crew.addCrew(currentCourse, crewName));
 
   crewName = '';
   crew.resetCrewNameInput();
