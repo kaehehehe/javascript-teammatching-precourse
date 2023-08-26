@@ -1,3 +1,5 @@
+const crewNameInput = document.querySelector('#crew-name-input');
+
 export const renderCourses = `<section>
     <h3> 크루를 관리할 코스를 선택해주세요</h3 >
       <div>
@@ -18,3 +20,17 @@ export const renderCourses = `<section>
       </div>
     </section>`;
 
+export const renderCrew = (crewName) => {
+  return `
+  <tr>
+    <td>1</td>
+    <td>${crewName}</td>
+    <td>
+      <button class="delete-crew-button">삭제</button>
+    </td>
+  </tr>`;
+};
+
+export const resetCrewNameInput = () => {
+  crewNameInput.value = '';
+};

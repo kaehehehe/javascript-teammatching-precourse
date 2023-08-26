@@ -2,8 +2,11 @@ import * as crew from './crew/crew.js';
 
 const crewTab = document.querySelector('#crew-tab');
 const teamTab = document.querySelector('#team-tab');
+const crewNameInput = document.querySelector('#crew-name-input');
+const addCrewButton = document.querySelector('#add-crew-button');
 
 let currentTab = null;
+let crewName = '';
 
 crewTab.addEventListener('click', () => {
   if (currentTab === 'crew') {
@@ -16,6 +19,23 @@ crewTab.addEventListener('click', () => {
 
   mainTag.insertAdjacentHTML('afterbegin', crew.renderCourses);
 });
+
+crewNameInput.addEventListener('change', (e) => {
+  crewName = e.target.value;
+});
+
+addCrewButton.addEventListener('click', () => {
+  if (crewName.trim() === '') {
+    return;
+  }
+
+  const tbody = document.querySelector('#tbody');
+  tbody.insertAdjacentHTML('beforeend', crew.renderCrew(crewName));
+
+  crewName = '';
+  crew.resetCrewNameInput();
+});
+
 
 //TODO: 팀 매칭 관리 구현
 teamTab.addEventListener('click', () => { });
