@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="src/main.js" defer></script>
+    <script type="module" src="src/main.js" defer></script>
     <title>우테코 크루와 팀 매칭 관리 보드</title>
   </head>
   <body>
@@ -22,27 +22,8 @@
           </ul>
         </nav>
       </header>
-      <main>
-        <section>
-          <h3>크루를 관리할 코스를 선택해주세요</h3>
-          <div>
-            <input
-              id="frontend-course"
-              type="radio"
-              name="course"
-              value="frontend"
-            />
-            <label for="frontend">프론트엔드</label>
-            <input
-              id="backend-course"
-              type="radio"
-              name="course"
-              value="backend"
-            />
-            <label for="backend">백엔드</label>
-          </div>
-        </section>
-        <section>
+      <main id="main">
+        <!-- <section>
           <h3>프론트엔드 크루 관리</h3>
           <form>
             <label>크루 이름</label>
@@ -70,7 +51,7 @@
               </tr>
             </tbody>
           </table>
-        </section>
+        </section> -->
       </main>
     </div>
   </body>
