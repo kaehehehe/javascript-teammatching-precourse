@@ -1,11 +1,13 @@
 import * as crew from './crew/crew.js';
+import { getLocalStorageData } from './shared/localStorage.js';
 
 const crewTab = document.querySelector('#crew-tab');
 const teamTab = document.querySelector('#team-tab');
 const crewNameInput = document.querySelector('#crew-name-input');
 const addCrewButton = document.querySelector('#add-crew-button');
 
-let currentTab = null;
+//TODO: null로 변경해야 함
+let currentTab = 'frontend';
 let crewName = '';
 
 crewTab.addEventListener('click', () => {
@@ -30,7 +32,7 @@ addCrewButton.addEventListener('click', () => {
   }
 
   const tbody = document.querySelector('#tbody');
-  tbody.insertAdjacentHTML('beforeend', crew.renderCrew(crewName));
+  tbody.insertAdjacentHTML('beforeend', crew.addCrew(currentTab, crewName));
 
   crewName = '';
   crew.resetCrewNameInput();
