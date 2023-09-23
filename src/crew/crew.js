@@ -226,8 +226,6 @@ export const updateLocalStorageData = (course, updateCrews) => {
 export const deleteCrew = (course) => {
   const crewTbody = document.querySelector('#tbody');
 
-
-
   crewTbody.addEventListener('click', (e) => {
     const id = e.target.dataset.id;
     const crews = getCrews(course);

@@ -44,3 +44,5 @@ teamTab.addEventListener('click', () => {
   const section = `<section id="team-section"></section>`;
   mainTag.insertAdjacentHTML('beforeend', section);
 });
+
+// console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]));
