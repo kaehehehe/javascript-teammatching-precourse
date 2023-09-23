@@ -1,5 +1,6 @@
 import * as crew from './crew/crew.js';
 import { removeElement } from './shared/resetDom.js';
+import * as team from './team/team.js';
 
 const crewTab = document.querySelector('#crew-tab');
 const teamTab = document.querySelector('#team-tab');
@@ -35,5 +36,11 @@ teamTab.addEventListener('click', () => {
   currentTab = 'team';
 
   const mainTag = document.querySelector('#main');
-  removeElement(mainTag);
+
+  removeElement(mainTag); 
+
+  team.renderSelectBox();
+
+  const section = `<section id="team-section"></section>`;
+  mainTag.insertAdjacentHTML('beforeend', section);
 });
