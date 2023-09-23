@@ -1,13 +1,11 @@
 import * as crew from './crew/crew.js';
-import { getLocalStorageData } from './shared/localStorage.js';
+import { removeElement } from './shared/resetDom.js';
 
 const crewTab = document.querySelector('#crew-tab');
 const teamTab = document.querySelector('#team-tab');
-const crewNameInput = document.querySelector('#crew-name-input');
-const addCrewButton = document.querySelector('#add-crew-button');
 
 let currentTab = null;
-let currentCourse = 'frontend';
+let currentCourse = null;
 let crewName = '';
 
 crewTab.addEventListener('click', () => {
@@ -19,28 +17,23 @@ crewTab.addEventListener('click', () => {
 
   const mainTag = document.querySelector('#main');
 
-  mainTag.insertAdjacentHTML('afterbegin', crew.renderCourses);
+  removeElement(mainTag);
 
-  //TODO: radio 버튼을 눌렀을 시 보이도록 수정해야 함
-  crew.renderCrews(crew.getFrontendCrews());
+  crew.renderCourses();
+  crew.setCrewSection();
+  crew.changeCourse(currentCourse, crewName);
 });
 
-crewNameInput.addEventListener('change', (e) => {
-  crewName = e.target.value;
-});
-
-addCrewButton.addEventListener('click', () => {
-  if (crewName.trim() === '') {
-    return;
-  }
-
-  const tbody = document.querySelector('#tbody');
-  tbody.insertAdjacentHTML('beforeend', crew.addCrew(currentCourse, crewName));
-
-  crewName = '';
-  crew.resetCrewNameInput();
-});
 
 
 //TODO: 팀 매칭 관리 구현
-teamTab.addEventListener('click', () => { });
+teamTab.addEventListener('click', () => {
+  if (currentTab === 'team') {
+    return;
+  }
+
+  currentTab = 'team';
+
+  const mainTag = document.querySelector('#main');
+  removeElement(mainTag);
+});
