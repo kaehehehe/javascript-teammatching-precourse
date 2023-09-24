@@ -76,7 +76,11 @@ const findCrewName = (course, index) => {
   return crews[index].name;
 };
 
-const teamMatching = (course, teamMemberCount) => {
+//=============
+let teamMemberCount = null;
+//=============
+
+const teamMatching = (course) => {
   const crewsCount = getCrewsCount(course);
 
   const teams = [];
@@ -99,20 +103,29 @@ const teamMatching = (course, teamMemberCount) => {
   return teams;
 };
 
-const clickTeamMatching = (course, mission) => {
+
+const clickMatchTeamButton = (course, mission) => {
   const matchTeamButton = document.getElementById('match-team-button');
 
   matchTeamButton.addEventListener('click', () => {
     const teamMemberCountInput = document.getElementById('team-member-count-input');
-    const crewsCount = getCrewsCount(course);
-    const teamMemberCount = teamMemberCountInput.value;
+    teamMemberCount = teamMemberCountInput.value;
 
-    const teams = teamMatching(course, teamMemberCount)
+    const teams = teamMatching(course);
 
     renderResultSection(course, mission, teams);
   });
-
 };
+
+
+const clickRematchTeamButton = (course, mission) => {
+  const rematchTeamButton = document.getElementById('rematch-team-button');
+
+  rematchTeamButton.addEventListener('click', () => {
+    const teams = teamMatching(course);
+    renderResultSection(course, mission, teams);
+  });
+}
 
 const renderResultSection = (course, mission, teams) => {
   const section = document.getElementById('team-section');
@@ -138,10 +151,8 @@ const renderResultSection = (course, mission, teams) => {
 
   teamMatchResult.insertAdjacentHTML('beforeend', teamList);
 
-
-}
-
-
+  clickRematchTeamButton(course, mission);
+};
 
 
 const renderDefaultMatchingSection = (course, mission) => {
@@ -179,5 +190,5 @@ const renderDefaultMatchingSection = (course, mission) => {
 
   ul.insertAdjacentHTML('beforeend', crewList);
 
-  clickTeamMatching(course, mission);
+  clickMatchTeamButton(course, mission);
 };
