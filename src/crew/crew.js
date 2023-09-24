@@ -119,13 +119,16 @@ export const setNewCrew = (course, newCrew) => {
   setLocalStorageData(updateCrews);
 };
 
-export const frontendCrewCount = () => {
-  return getCrews('frontend').length;
-};
+export const getCrewsCount = (course) => {
+  const crews = getCrews(course);
 
-export const backendCrewCount = () => {
-  return getCrews('backend').length;
-};
+  switch (course) {
+    case 'frontend':
+      return crews.length;
+    case 'backend':
+      return crews.length;
+  }
+}
 
 export const renderCourses = () => {
   const mainTag = document.querySelector('#main');
@@ -161,7 +164,7 @@ export const updateCrewTable = (course, crewName) => {
 
   const tr = `
   <tr id=${id}>
-    <td>${course === 'frontend' ? frontendCrewCount() : backendCrewCount()}</td>
+    <td>${getCrewsCount(course)}</td>
     <td>${crewName}</td>
     <td>
       <button class="delete-crew-button" data-id=${id}>삭제</button>
