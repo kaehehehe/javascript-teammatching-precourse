@@ -76,6 +76,29 @@ const findCrewName = (course, index) => {
   return crews[index].name;
 };
 
+const teamMatching = (course, teamMemberCount) => {
+  const crewsCount = getCrewsCount(course);
+
+  const teams = [];
+
+  const indexArray = Array.from({ length: crewsCount }, (_, idx) => idx);
+
+  MissionUtils.Random.shuffle(indexArray);
+
+  while (indexArray.length > 0) {
+    const team = indexArray.splice(0, teamMemberCount);
+
+    let teamMember = [];
+
+    for (let i of team) {
+      teamMember.push(findCrewName(course, i));
+    }
+    teams.push(teamMember.toString());
+  }
+
+  return teams;
+};
+
 const clickTeamMatching = (course, mission) => {
   const matchTeamButton = document.getElementById('match-team-button');
 
@@ -83,25 +106,8 @@ const clickTeamMatching = (course, mission) => {
     const teamMemberCountInput = document.getElementById('team-member-count-input');
     const crewsCount = getCrewsCount(course);
     const teamMemberCount = teamMemberCountInput.value;
-    const teams = [];
 
-
-    const indexArray = Array.from({ length: crewsCount }, (_, idx) => idx);
-
-    // console.log(indexArray);
-
-    MissionUtils.Random.shuffle(indexArray);
-
-    while (indexArray.length > 0) {
-      const team = indexArray.splice(0, teamMemberCount);
-
-      let teamMember = [];
-
-      for (let i of team) {
-        teamMember.push(findCrewName(course, i));
-      }
-      teams.push(teamMember.toString());
-    }
+    const teams = teamMatching(course, teamMemberCount)
 
     renderResultSection(course, mission, teams);
   });
